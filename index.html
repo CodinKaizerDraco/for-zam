@@ -6,171 +6,110 @@
 <title>For her <3</title>
 
 <style>
-* {
-    box-sizing: border-box;
-}
-
 body {
     margin: 0;
+    padding: 0;
     font-family: Arial, sans-serif;
-    height: 100vh;
+    background-color: white; /* Password page starts white */
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100vh;
+    overflow: hidden;
     transition: background-color 0.4s ease;
 }
 
-/* PASSWORD SCREEN (WHITE) */
-.password-mode {
-    background-color: white;
-}
-
-/* MAIN PAGE (PINK) */
-.valentine-mode {
-    background-color: #ff9ecf;
-}
-
-/* Password Box */
-.card {
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+.container {
     text-align: center;
-    width: 90%;
-    max-width: 320px;
+    position: relative;
 }
 
-.card h1 {
-    font-size: 18px;
-    margin-bottom: 15px;
-    color: #333;
-}
-
-input {
-    width: 100%;
-    padding: 10px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 14px;
+h1 {
+    font-size: 40px;
+    color: black; /* Black text for password page */
 }
 
 button {
-    margin-top: 12px;
-    padding: 10px;
-    border-radius: 6px;
+    padding: 15px 30px;
+    font-size: 18px;
     border: none;
-    font-size: 14px;
+    border-radius: 10px;
     cursor: pointer;
-}
-
-/* Unlock button */
-#unlockBtn {
-    width: 100%;
-    background-color: #333;
-    color: white;
-}
-
-/* Main Content */
-#mainContent {
-    display: none;
-    text-align: center;
-    width: 100%;
-}
-
-.question {
-    font-size: 24px;
-    color: white;
-    margin-bottom: 20px;
-}
-
-.action-buttons {
-    position: relative;
-    height: 120px;
+    margin: 20px;
+    transition: 0.3s;
 }
 
 #yesBtn {
     background-color: white;
-    color: #ff4fa3;
-    width: 120px;
+    color: hotpink;
 }
 
 #noBtn {
-    background-color: #ff4fa3;
+    background-color: red;
     color: white;
-    width: 120px;
     position: absolute;
-    left: 160px;
+}
+
+#message {
+    font-size: 35px;
+    color: white;
+    margin-top: 20px;
+}
+
+input {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid black;
 }
 </style>
 </head>
 
-<body class="password-mode">
+<body>
 
-<!-- PASSWORD SCREEN -->
-<div id="passwordScreen" class="card">
+<div id="passwordScreen" class="container">
     <h1>Enter Password</h1>
-    <input type="password" id="passwordInput" placeholder="Password">
-    <button id="unlockBtn" onclick="checkPassword()">Unlock</button>
+    <input type="password" id="passwordInput" placeholder="Enter password">
+    <br><br>
+    <button onclick="checkPassword()">Enter</button>
 </div>
 
-<!-- MAIN CONTENT -->
-<div id="mainContent">
-    <div class="question">
-        Will you be my Valentine? 🥺💖
-    </div>
-
-    <div class="action-buttons">
-        <button id="yesBtn">Yes</button>
-        <button id="noBtn">No</button>
-    </div>
+<div id="mainContent" class="container" style="display:none;">
+    <h1 style="color:white;">Will you be my Valentine 🥺💗</h1>
+    <button id="yesBtn">Yes 💕</button>
+    <button id="noBtn">No 😢</button>
+    <div id="message"></div>
 </div>
 
 <script>
 function checkPassword() {
     const password = document.getElementById("passwordInput").value;
-
     if (password === "Zamzaenta") {
-        document.body.classList.remove("password-mode");
-        document.body.classList.add("valentine-mode");
+
+        // Change background to pink
+        document.body.style.backgroundColor = "pink";
 
         document.getElementById("passwordScreen").style.display = "none";
         document.getElementById("mainContent").style.display = "block";
     } else {
-        alert("Incorrect password");
+        alert("Wrong password");
     }
 }
 
 const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
 
-function moveNoButton() {
-    const x = Math.random() * (window.innerWidth - 140);
-    const y = Math.random() * (window.innerHeight - 60);
+noBtn.addEventListener("mouseover", function() {
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 50);
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
-}
-
-noBtn.addEventListener("mouseover", moveNoButton);
-noBtn.addEventListener("touchstart", function(e) {
-    e.preventDefault();
-    moveNoButton();
 });
 
 yesBtn.addEventListener("click", function() {
-    document.body.innerHTML = `
-        <div style="
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            height:100vh;
-            background-color:#ff9ecf;
-            font-size:26px;
-            color:white;
-            text-align:center;
-            padding:20px;
-        ">
-            Yay!!! Love you lots zamiee!
+    document.getElementById("mainContent").innerHTML = `
+        <div style="text-align:center;">
+            <h1 style="color:white;">Yay!!! Love you lots zamiee :D 💕</h1>
+            <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" width="300">
         </div>
     `;
 });
