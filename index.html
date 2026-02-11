@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Her <3</title>
+<title>For her <3</title>
 
 <style>
 * {
@@ -12,83 +12,63 @@
 
 body {
     margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: Arial, sans-serif;
     height: 100vh;
-    background: linear-gradient(135deg, #ff9ecf, #ff6fb5);
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
+    transition: background-color 0.4s ease;
 }
 
-/* Password Card */
+/* PASSWORD SCREEN (WHITE) */
+.password-mode {
+    background-color: white;
+}
+
+/* MAIN PAGE (PINK) */
+.valentine-mode {
+    background-color: #ff9ecf;
+}
+
+/* Password Box */
 .card {
-    background: rgba(255, 255, 255, 0.2);
+    background: white;
     padding: 30px;
-    border-radius: 20px;
-    backdrop-filter: blur(12px);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
     text-align: center;
-    color: white;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
     width: 90%;
-    max-width: 350px;
+    max-width: 320px;
 }
 
-h1 {
-    font-size: 24px;
+.card h1 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #333;
 }
 
 input {
-    padding: 12px;
-    border-radius: 10px;
-    border: none;
-    outline: none;
     width: 100%;
-    text-align: center;
-    font-size: 16px;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
 }
 
 button {
-    margin-top: 15px;
-    padding: 12px 20px;
+    margin-top: 12px;
+    padding: 10px;
+    border-radius: 6px;
     border: none;
-    border-radius: 10px;
-    font-size: 16px;
+    font-size: 14px;
     cursor: pointer;
-    transition: 0.2s;
 }
 
-/* Buttons */
+/* Unlock button */
 #unlockBtn {
-    background: white;
-    color: hotpink;
-    font-weight: bold;
     width: 100%;
-}
-
-#yesBtn {
-    background: white;
-    color: hotpink;
-}
-
-#noBtn {
-    background: red;
+    background-color: #333;
     color: white;
-    position: absolute;
-}
-
-/* Shake Animation */
-@keyframes shake {
-    0% { transform: translateX(0); }
-    25% { transform: translateX(-8px); }
-    50% { transform: translateX(8px); }
-    75% { transform: translateX(-8px); }
-    100% { transform: translateX(0); }
-}
-
-.shake {
-    animation: shake 0.4s;
 }
 
 /* Main Content */
@@ -99,90 +79,98 @@ button {
 }
 
 .question {
+    font-size: 24px;
     color: white;
-    font-size: 26px;
-    padding: 0 20px;
+    margin-bottom: 20px;
 }
 
-.btn-container {
-    margin-top: 20px;
+.action-buttons {
+    position: relative;
+    height: 120px;
+}
+
+#yesBtn {
+    background-color: white;
+    color: #ff4fa3;
+    width: 120px;
+}
+
+#noBtn {
+    background-color: #ff4fa3;
+    color: white;
+    width: 120px;
+    position: absolute;
+    left: 160px;
 }
 </style>
 </head>
 
-<body>
+<body class="password-mode">
 
 <!-- PASSWORD SCREEN -->
 <div id="passwordScreen" class="card">
-    <h1>Enter Password >:)</h1>
-    <input type="password" id="passwordInput" placeholder="Enter password">
-    <button id="unlockBtn" onclick="checkPassword()">Unlock 💕</button>
+    <h1>Enter Password</h1>
+    <input type="password" id="passwordInput" placeholder="Password">
+    <button id="unlockBtn" onclick="checkPassword()">Unlock</button>
 </div>
 
 <!-- MAIN CONTENT -->
 <div id="mainContent">
     <div class="question">
-        Will you be my Valentine? 🥺💗
+        Will you be my Valentine? 🥺💖
     </div>
 
-    <div class="btn-container">
-        <button id="yesBtn">Yes 💕</button>
-        <button id="noBtn">No 😢</button>
+    <div class="action-buttons">
+        <button id="yesBtn">Yes</button>
+        <button id="noBtn">No</button>
     </div>
 </div>
 
 <script>
 function checkPassword() {
     const password = document.getElementById("passwordInput").value;
-    const card = document.getElementById("passwordScreen");
 
     if (password === "Zamzaenta") {
-        card.style.display = "none";
+        document.body.classList.remove("password-mode");
+        document.body.classList.add("valentine-mode");
+
+        document.getElementById("passwordScreen").style.display = "none";
         document.getElementById("mainContent").style.display = "block";
     } else {
-        card.classList.add("shake");
-        setTimeout(() => card.classList.remove("shake"), 400);
+        alert("Incorrect password");
     }
 }
 
 const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
 
-/* Move button function */
 function moveNoButton() {
-    const x = Math.random() * (window.innerWidth - 120);
+    const x = Math.random() * (window.innerWidth - 140);
     const y = Math.random() * (window.innerHeight - 60);
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
 }
 
-/* PC hover */
 noBtn.addEventListener("mouseover", moveNoButton);
-
-/* Mobile touch */
 noBtn.addEventListener("touchstart", function(e) {
     e.preventDefault();
     moveNoButton();
 });
 
-/* YES clicked */
 yesBtn.addEventListener("click", function() {
     document.body.innerHTML = `
         <div style="
             display:flex;
-            flex-direction:column;
             justify-content:center;
             align-items:center;
             height:100vh;
-            text-align:center;
+            background-color:#ff9ecf;
+            font-size:26px;
             color:white;
+            text-align:center;
             padding:20px;
         ">
-            <h1 style="font-size:28px;">
-                Yay!!! Love you lots zamiee 💕
-            </h1>
-            <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" 
-                 style="max-width:300px; width:90%; border-radius:20px;">
+            Yay!!! Love you lots zamiee!
         </div>
     `;
 });
