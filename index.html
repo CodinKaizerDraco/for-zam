@@ -107,21 +107,21 @@ function moveNoButton() {
     const x = Math.random() * maxX;
     const y = Math.random() * maxY;
 
-    noBtn.style.position = "fixed";  // better for mobile
+    noBtn.style.position = "fixed"; 
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
 }
 
-// Desktop hover
+
 noBtn.addEventListener("mouseover", moveNoButton);
 
-// Mobile touch
+
 noBtn.addEventListener("touchstart", function(e) {
     e.preventDefault();
     moveNoButton();
 });
 
-// Extra safety (if user taps fast)
+
 noBtn.addEventListener("click", function(e) {
     e.preventDefault();
     moveNoButton();
