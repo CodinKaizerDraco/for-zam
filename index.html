@@ -153,13 +153,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
         typedText.textContent = ""; // Clear first
         let i = 0;
-        const speed = 300;
-
+        
         function typeWriter() {
             if (i < text.length) {
                 typedText.textContent += text.charAt(i);
                 i++;
-                setTimeout(typeWriter, speed);
+                setTimeout(typeWriter, 250);
             }
         }
 
