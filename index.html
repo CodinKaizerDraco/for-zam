@@ -10,7 +10,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background-color: white; 
+    background-color: white;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,11 +22,12 @@ body {
 .container {
     text-align: center;
     position: relative;
+    width: 100%;
+    padding: 20px;
 }
 
 h1 {
     font-size: 40px;
-    color: black;
 }
 
 button {
@@ -50,22 +51,36 @@ button {
     position: absolute;
 }
 
-#message {
-    font-size: 35px;
-    color: white;
-    margin-top: 20px;
-}
-
 input {
     padding: 10px;
     border-radius: 8px;
     border: 1px solid black;
+}
+
+/* Hidden initially */
+#mainContent {
+    display: none;
+}
+
+#finalMessage {
+    display: none;
+    color: white;
+    max-width: 600px;
+    margin: auto;
+}
+
+#typedText {
+    font-size: 14px;
+    margin-top: 18px;
+    line-height: 1.6;
+    opacity: 0.95;
 }
 </style>
 </head>
 
 <body>
 
+<!-- Password Screen -->
 <div id="passwordScreen" class="container">
     <h1>Enter Password</h1>
     <input type="password" id="passwordInput" placeholder="Enter password">
@@ -73,21 +88,32 @@ input {
     <button onclick="checkPassword()">Enter</button>
 </div>
 
-<div id="mainContent" class="container" style="display:none;">
-    <h1 style="color:white;">Will you be my Valentine 🥺💗</h1>
+<!-- Valentine Question -->
+<div id="mainContent" class="container">
+    <h1 style="color:white;">Will you be my Valentine 🥺</h1>
     <button id="yesBtn">Yes 💕</button>
     <button id="noBtn">No 😢</button>
-    <div id="message"></div>
+</div>
+
+<!-- Final Message -->
+<div id="finalMessage" class="container">
+    <h1>Yay!!! Love you lots zam 💕</h1>
+
+    <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif"
+         width="300"
+         style="border-radius:15px; margin-top:15px; max-width:90%;">
+
+    <p id="typedText"></p>
 </div>
 
 <script>
+
+// Password Check
 function checkPassword() {
     const password = document.getElementById("passwordInput").value;
+
     if (password === "Zamzaenta") {
-
-        
         document.body.style.backgroundColor = "pink";
-
         document.getElementById("passwordScreen").style.display = "none";
         document.getElementById("mainContent").style.display = "block";
     } else {
@@ -95,77 +121,53 @@ function checkPassword() {
     }
 }
 
+// Buttons
 const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
 
+// Move No Button (Works forever on mobile + PC)
 function moveNoButton() {
     const rect = noBtn.getBoundingClientRect();
-
-    const maxX = window.innerWidth - rect.width - 20;
-    const maxY = window.innerHeight - rect.height - 20;
+    const maxX = window.innerWidth - rect.width;
+    const maxY = window.innerHeight - rect.height;
 
     const x = Math.random() * maxX;
     const y = Math.random() * maxY;
 
-    noBtn.style.position = "fixed"; 
+    noBtn.style.position = "fixed";
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
 }
 
-
 noBtn.addEventListener("mouseover", moveNoButton);
+noBtn.addEventListener("touchstart", moveNoButton);
+noBtn.addEventListener("click", moveNoButton);
 
-
-noBtn.addEventListener("touchstart", function(e) {
-    e.preventDefault();
-    moveNoButton();
-});
-
-
-noBtn.addEventListener("click", function(e) {
-    e.preventDefault();
-    moveNoButton();
-});
-
+// YES CLICK
 yesBtn.addEventListener("click", function() {
 
-    document.getElementById("mainContent").innerHTML = `
-        <div style="text-align:center; max-width:600px; margin:auto; padding:20px; color:white;">
-            <h1>Yay!!! Love you lots zam 💕</h1>
+    document.getElementById("mainContent").style.display = "none";
+    document.getElementById("finalMessage").style.display = "block";
 
-            <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" 
-                 width="300" 
-                 style="border-radius:15px; margin-top:15px; max-width:90%;">
+    const textElement = document.getElementById("typedText");
 
-            <p id="typedText" style="
-                font-size:14px;
-                margin-top:18px;
-                line-height:1.6;
-                opacity:0.95;
-            "></p>
-        </div>
-    `;
+    const text = "For as long as I'm alive, until my last breath, you'll be loved by me. I have never loved anyone or anything as deeply as I love you, and I mean that with my entire soul and entire heart. Even though we are from different religion, I truly hope we get together in the future. Love you 🙂";
 
-    // Delay slightly to ensure element exists
-    setTimeout(() => {
+    let i = 0;
+    const speed = 30;
 
-        const textElement = document.getElementById("typedText");
-
-        const text = "For as long as I'm alive, until my last breath, you'll be loved by me. I have never loved anyone or anything as deeply as I love you, and I mean that with my entire soul and entire heart. Even though we are from different religion, I truly hope we get together in the future. Love you 🙂";
-
-        let i = 0;
-        const speed = 30;
-
-        function typeWriter() {
-            if (i < text.length) {
-                textElement.textContent += text.charAt(i);
-                i++;
-                setTimeout(typeWriter, speed);
-            }
+    function typeWriter() {
+        if (i < text.length) {
+            textElement.textContent += text.charAt(i);
+            i++;
+            setTimeout(typeWriter, speed);
         }
+    }
 
-        typeWriter();
-
-    }, 100); 
-
+    typeWriter();
 });
+
+</script>
+
+</body>
+</html>
