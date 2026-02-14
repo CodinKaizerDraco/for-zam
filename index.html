@@ -142,23 +142,30 @@ yesBtn.addEventListener("click", function() {
                 margin-top:18px;
                 line-height:1.6;
                 opacity:0.95;
-                min-height:80px;
             "></p>
         </div>
     `;
 
-    const text = "For as long as I'm alive, until my last breath, you'll be loved by me. I have never loved anyone or anything as deeply as I love you, and I mean that with my entire soul and entire heart. Even though we are from different religions, I truly hope we get together in the future. Love you 🙂";
+    // Delay slightly to ensure element exists
+    setTimeout(() => {
 
-    let i = 0;
-    const speed = 35; // typing speed (smaller = faster)
+        const textElement = document.getElementById("typedText");
 
-    function typeWriter() {
-        if (i < text.length) {
-            document.getElementById("typedText").innerHTML += text.charAt(i);
-            i++;
-            setTimeout(typeWriter, speed);
+        const text = "For as long as I'm alive, until my last breath, you'll be loved by me. I have never loved anyone or anything as deeply as I love you, and I mean that with my entire soul and entire heart. Even though we are from different religion, I truly hope we get together in the future. Love you 🙂";
+
+        let i = 0;
+        const speed = 30;
+
+        function typeWriter() {
+            if (i < text.length) {
+                textElement.textContent += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
+            }
         }
-    }
 
-    typeWriter();
+        typeWriter();
+
+    }, 100); 
+
 });
