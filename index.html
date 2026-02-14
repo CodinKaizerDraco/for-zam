@@ -79,6 +79,7 @@ input {
 
 <body>
 
+
 <div id="passwordScreen" class="container">
     <h1>Enter Password</h1>
     <input type="password" id="passwordInput" placeholder="Enter password">
@@ -86,11 +87,13 @@ input {
     <button id="enterBtn">Enter</button>
 </div>
 
+
 <div id="mainContent" class="container">
     <h1 style="color:white;">Will you be my Valentine 🥺</h1>
     <button id="yesBtn">Yes 💕</button>
     <button id="noBtn">No 😢</button>
 </div>
+
 
 <div id="finalMessage" class="container">
     <h1>Yay!!! Love you lots zam 💕</h1>
@@ -125,7 +128,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    
+
     function moveNoButton() {
         const rect = noBtn.getBoundingClientRect();
         const maxX = window.innerWidth - rect.width;
@@ -151,16 +154,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const text = "For as long as I'm alive, until my last breath, you'll be loved by me. I have never loved anyone or anything as deeply as I love you, and I mean that with my entire soul and entire heart. Even though we are from different religion, I truly hope that we get together in the future. Love you 🙂";
 
-typedText.textContent = "";
-let i = 0;
+        typedText.textContent = "";
+        let i = 0;
 
-const speed = 70; 
+        const speed = 150;
 
-const typingInterval = setInterval(() => {
-    if (i < text.length) {
-        typedText.textContent += text.charAt(i);
-        i++;
-    } else {
-        clearInterval(typingInterval);
-    }
-}, speed);
+        const typingInterval = setInterval(function () {
+            if (i < text.length) {
+                typedText.textContent += text.charAt(i);
+                i++;
+            } else {
+                clearInterval(typingInterval);
+            }
+        }, speed);
+
+    });
+
+});
+</script>
+
+</body>
+</html>
