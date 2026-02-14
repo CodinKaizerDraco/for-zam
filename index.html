@@ -151,22 +151,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const text = "For as long as I'm alive, until my last breath, you'll be loved by me. I have never loved anyone or anything as deeply as I love you, and I mean that with my entire soul and entire heart. Even though we are from different religion, I truly hope that we get together in the future. Love you 🙂";
 
-        typedText.textContent = ""; 
-        let i = 0;
-        
-        function typeWriter() {
-            if (i < text.length) {
-                typedText.textContent += text.charAt(i);
-                i++;
-                setTimeout(typeWriter, 10);
-            }
-        }
+typedText.textContent = "";
+let i = 0;
 
-        typeWriter();
-    });
+const speed = 70; 
 
-});
-</script>
-
-</body>
-                                                           </html>
+const typingInterval = setInterval(() => {
+    if (i < text.length) {
+        typedText.textContent += text.charAt(i);
+        i++;
+    } else {
+        clearInterval(typingInterval);
+    }
+}, speed);
