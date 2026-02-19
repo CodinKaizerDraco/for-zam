@@ -1,178 +1,117 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For her <3</title>
-
+<title>Valentine</title>
 <style>
 body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    overflow: hidden;
-    transition: background-color 0.4s ease;
+  margin: 0;
+  font-family: Arial;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  transition: 0.4s;
 }
 
 .container {
-    text-align: center;
-    position: relative;
-    width: 100%;
-    padding: 20px;
-}
-
-h1 {
-    font-size: 40px;
-}
-
-button {
-    padding: 15px 30px;
-    font-size: 18px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    margin: 20px;
-    transition: 0.3s;
-}
-
-#yesBtn {
-    background-color: white;
-    color: hotpink;
-}
-
-#noBtn {
-    background-color: red;
-    color: white;
-    position: absolute;
-}
-
-input {
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid black;
+  text-align: center;
 }
 
 #mainContent,
 #finalMessage {
-    display: none;
+  display: none;
 }
 
-#finalMessage {
-    color: white;
-    max-width: 600px;
-    margin: auto;
+button {
+  padding: 10px 20px;
+  margin: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 8px;
+  border: none;
+}
+
+#noBtn {
+  position: absolute;
 }
 
 #typedText {
-    font-size: 14px;
-    margin-top: 18px;
-    line-height: 1.6;
-    opacity: 0;
+  font-size: 14px;
+  margin-top: 15px;
 }
 </style>
 </head>
-
 <body>
 
-
+<!-- PASSWORD SCREEN -->
 <div id="passwordScreen" class="container">
-    <h1>Enter Password</h1>
-    <input type="password" id="passwordInput" placeholder="Enter password">
-    <br><br>
-    <button id="enterBtn">Enter</button>
+  <h2>Enter Password</h2>
+  <input type="password" id="passwordInput">
+  <br><br>
+  <button id="enterBtn">Enter</button>
 </div>
 
-
+<!-- MAIN SCREEN -->
 <div id="mainContent" class="container">
-    <h1 style="color:white;">Will you be my Valentine 🥺</h1>
-    <button id="yesBtn">Yes 💕</button>
-    <button id="noBtn">No 😢</button>
+  <h2 style="color:white;">Will you be my Valentine? 🥺</h2>
+  <button id="yesBtn">Yes 💕</button>
+  <button id="noBtn">No 😢</button>
 </div>
 
-
+<!-- FINAL SCREEN -->
 <div id="finalMessage" class="container">
-    <h1>Yay!!! Love you lots zam 💕</h1>
+  <h2 style="color:white;">Yay!!! Love you lots 💕</h2>
 
-    <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif"
-         width="300"
-         style="border-radius:15px; margin-top:15px; max-width:90%;">
+  <img 
+    src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" 
+    width="300"
+    style="border-radius:15px; margin-top:15px; max-width:90%;"
+  >
 
-    <p id="typedText"></p>
+  <p id="typedText"></p>
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function() {
 
-    const enterBtn = document.getElementById("enterBtn");
-    const passwordInput = document.getElementById("passwordInput");
+  const enterBtn = document.getElementById("enterBtn");
+  const passwordInput = document.getElementById("passwordInput");
+  const passwordScreen = document.getElementById("passwordScreen");
+  const mainContent = document.getElementById("mainContent");
+  const finalMessage = document.getElementById("finalMessage");
+  const yesBtn = document.getElementById("yesBtn");
+  const noBtn = document.getElementById("noBtn");
+  const typedText = document.getElementById("typedText");
 
-    const passwordScreen = document.getElementById("passwordScreen");
-    const mainContent = document.getElementById("mainContent");
-
-    const yesBtn = document.getElementById("yesBtn");
-    const noBtn = document.getElementById("noBtn");
-
-    const finalMessage = document.getElementById("finalMessage");
-    const typedText = document.getElementById("typedText");
-
-    // ENTER KEY SUPPORT
-    passwordInput.addEventListener("keypress", function(e) {
-        if (e.key === "Enter") {
-            enterBtn.click();
-        }
-    });
-
-    // PASSWORD BUTTON
-    enterBtn.addEventListener("click", () => {
-
-        const password = passwordInput.value.trim();
-
-        if (password === "DracoMenace") {
-            passwordScreen.style.display = "none";
-            mainContent.style.display = "block";
-            document.body.style.backgroundColor = "pink";
-        } else {
-            alert("Wrong password");
-        }
-    });
-
-    // MOVE NO BUTTON
-    function moveNoButton() {
-        const maxX = window.innerWidth - noBtn.offsetWidth;
-        const maxY = window.innerHeight - noBtn.offsetHeight;
-
-        const x = Math.random() * maxX;
-        const y = Math.random() * maxY;
-
-        noBtn.style.position = "fixed";
-        noBtn.style.left = x + "px";
-        noBtn.style.top = y + "px";
+  // PASSWORD
+  enterBtn.addEventListener("click", function() {
+    if (passwordInput.value.trim() === "DracoMenace") {
+      passwordScreen.style.display = "none";
+      mainContent.style.display = "block";
+      document.body.style.backgroundColor = "pink";
+    } else {
+      alert("Wrong password");
     }
+  });
 
-    noBtn.addEventListener("mouseover", moveNoButton);
-    noBtn.addEventListener("touchstart", moveNoButton);
+  // MOVE NO BUTTON
+  function moveNoButton() {
+    const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+    const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+  }
 
-    // YES BUTTON
-    yesBtn.addEventListener("click", () => {
+  noBtn.addEventListener("mouseover", moveNoButton);
+  noBtn.addEventListener("touchstart", moveNoButton);
 
-        mainContent.style.display = "none";
-        finalMessage.style.display = "block";
-
-        const text = "For as long as I'm alive, until my last breath, you'll be loved by me. I have never loved anyone or anything as deeply as I love you, and I mean that with my entire soul and entire heart. Even though we are from different religion, I truly hope that we get together in the future. Love you 🙂";
-
-        typedText.textContent = text;
-        typedText.style.opacity = "0";
-        typedText.style.transition = "opacity 1.5s ease";
-
-        setTimeout(() => {
-            typedText.style.opacity = "1";
-        }, 100);
-    });
+  // YES BUTTON
+  yesBtn.addEventListener("click", function() {
+    mainContent.style.display = "none";
+    finalMessage.style.display = "block";
+    typedText.textContent = 
+      "For as long as I'm alive, until my last breath, you'll be loved by me. Love you always 💕";
+  });
 
 });
 </script>
