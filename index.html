@@ -106,33 +106,45 @@ input {
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
 
     const enterBtn = document.getElementById("enterBtn");
     const passwordInput = document.getElementById("passwordInput");
+
     const passwordScreen = document.getElementById("passwordScreen");
     const mainContent = document.getElementById("mainContent");
-    const finalMessage = document.getElementById("finalMessage");
+
     const yesBtn = document.getElementById("yesBtn");
     const noBtn = document.getElementById("noBtn");
+
+    const finalMessage = document.getElementById("finalMessage");
     const typedText = document.getElementById("typedText");
 
-    
-    enterBtn.addEventListener("click", function () {
-        if (passwordInput.value === "DracoMenace") {
-            document.body.style.backgroundColor = "pink";
+    // ENTER KEY SUPPORT
+    passwordInput.addEventListener("keypress", function(e) {
+        if (e.key === "Enter") {
+            enterBtn.click();
+        }
+    });
+
+    // PASSWORD BUTTON
+    enterBtn.addEventListener("click", () => {
+
+        const password = passwordInput.value.trim();
+
+        if (password === "DracoMenace") {
             passwordScreen.style.display = "none";
             mainContent.style.display = "block";
+            document.body.style.backgroundColor = "pink";
         } else {
             alert("Wrong password");
         }
     });
 
-    
+    // MOVE NO BUTTON
     function moveNoButton() {
-        const rect = noBtn.getBoundingClientRect();
-        const maxX = window.innerWidth - rect.width;
-        const maxY = window.innerHeight - rect.height;
+        const maxX = window.innerWidth - noBtn.offsetWidth;
+        const maxY = window.innerHeight - noBtn.offsetHeight;
 
         const x = Math.random() * maxX;
         const y = Math.random() * maxY;
@@ -144,10 +156,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     noBtn.addEventListener("mouseover", moveNoButton);
     noBtn.addEventListener("touchstart", moveNoButton);
-    noBtn.addEventListener("click", moveNoButton);
 
-    
-    yesBtn.addEventListener("click", function () {
+    // YES BUTTON
+    yesBtn.addEventListener("click", () => {
 
         mainContent.style.display = "none";
         finalMessage.style.display = "block";
@@ -155,10 +166,11 @@ document.addEventListener("DOMContentLoaded", function () {
         const text = "For as long as I'm alive, until my last breath, you'll be loved by me. I have never loved anyone or anything as deeply as I love you, and I mean that with my entire soul and entire heart. Even though we are from different religion, I truly hope that we get together in the future. Love you 🙂";
 
         typedText.textContent = text;
+        typedText.style.opacity = "0";
         typedText.style.transition = "opacity 1.5s ease";
-        
+
         setTimeout(() => {
-            typedText.style.opacity = 1;
+            typedText.style.opacity = "1";
         }, 100);
     });
 
