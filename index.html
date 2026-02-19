@@ -72,7 +72,7 @@ input {
     font-size: 14px;
     margin-top: 18px;
     line-height: 1.6;
-    opacity: 0.95;
+    opacity: 0;
 }
 </style>
 </head>
@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-
+    
     function moveNoButton() {
         const rect = noBtn.getBoundingClientRect();
         const maxX = window.innerWidth - rect.width;
@@ -155,11 +155,12 @@ document.addEventListener("DOMContentLoaded", function () {
         const text = "For as long as I'm alive, until my last breath, you'll be loved by me. I have never loved anyone or anything as deeply as I love you, and I mean that with my entire soul and entire heart. Even though we are from different religion, I truly hope that we get together in the future. Love you 🙂";
 
         typedText.textContent = text;
-typedText.style.opacity = 0;
-typedText.style.transition = "opacity 1s ease";
-setTimeout(() => {
-    typedText.style.opacity = 1;
-}, 100);
+        typedText.style.transition = "opacity 1.5s ease";
+        
+        setTimeout(() => {
+            typedText.style.opacity = 1;
+        }, 100);
+    });
 
 });
 </script>
