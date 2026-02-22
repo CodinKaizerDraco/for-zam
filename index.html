@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const noBtn = document.getElementById("noBtn");
   const typedText = document.getElementById("typedText");
 
-  // PASSWORD
+  // PASSWORD BUTTON
   enterBtn.addEventListener("click", function() {
     if (passwordInput.value.trim() === "DracoMenace") {
       passwordScreen.style.display = "none";
@@ -109,20 +109,22 @@ document.addEventListener("DOMContentLoaded", function() {
   noBtn.addEventListener("touchstart", moveNoButton);
 
   // YES BUTTON
-yesBtn.addEventListener("click", function() {
+  yesBtn.addEventListener("click", function() {
 
-  mainContent.style.display = "none";
-  finalMessage.style.display = "block";
+    mainContent.style.display = "none";
+    finalMessage.style.display = "block";
 
-  typedText.textContent =
-  "For as long as I'm alive, until my last breath, you'll be loved by me. I have never loved anyone or anything as deeply as I love you, and I mean that with my entire soul and entire heart. Even though we are from different religion, I truly hope that we get together in the future. Love you 🙂";
+    typedText.style.opacity = "0";
 
-  // small delay before fade in
-  setTimeout(() => {
-    typedText.style.opacity = "1";
-  }, 200);
-});
-  
+    typedText.textContent =
+    "For as long as I'm alive, until my last breath, you'll be loved by me. I have never loved anyone or anything as deeply as I love you, and I mean that with my entire soul and entire heart. Even though we are from different religion, I truly hope that we get together in the future. Love you 🙂";
+
+    setTimeout(function() {
+      typedText.style.opacity = "1";
+    }, 200);
+
+  });
+
 });
 </script>
 
